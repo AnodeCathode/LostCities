@@ -19,9 +19,8 @@ import java.util.function.Function;
 @Mod(modid = LostCities.MODID, name="The Lost Cities",
         dependencies =
                         "after:forge@[" + LostCities.MIN_FORGE11_VER + ",)",
-        version = LostCities.VERSION,
-        acceptedMinecraftVersions = "[1.12,1.13)",
-        acceptableRemoteVersions = "*")
+        version = LostCities.VERSION)
+
 public class LostCities {
     public static final String MODID = "lostcities_tnfc";
     public static final String VERSION = "12.2.66";

@@ -35,16 +35,16 @@ public class LostCityConfiguration {
     };
 
     public static String[] ASSETS = new String[] {
-            "/assets/lostcities/citydata/conditions.json",
-            "/assets/lostcities/citydata/palette.json",
-            "/assets/lostcities/citydata/palette_desert.json",
-            "/assets/lostcities/citydata/palette_chisel.json",
-            "/assets/lostcities/citydata/palette_chisel_desert.json",
-            "/assets/lostcities/citydata/highwayparts.json",
-            "/assets/lostcities/citydata/railparts.json",
-            "/assets/lostcities/citydata/monorailparts.json",
-            "/assets/lostcities/citydata/buildingparts.json",
-            "/assets/lostcities/citydata/library.json",
+            "/assets/lostcities_tnfc/citydata/conditions.json",
+            "/assets/lostcities_tnfc/citydata/palette.json",
+            "/assets/lostcities_tnfc/citydata/palette_desert.json",
+            "/assets/lostcities_tnfc/citydata/palette_chisel.json",
+            "/assets/lostcities_tnfc/citydata/palette_chisel_desert.json",
+            "/assets/lostcities_tnfc/citydata/highwayparts.json",
+            "/assets/lostcities_tnfc/citydata/railparts.json",
+            "/assets/lostcities_tnfc/citydata/monorailparts.json",
+            "/assets/lostcities_tnfc/citydata/buildingparts.json",
+            "/assets/lostcities_tnfc/citydata/library.json",
             "$lostcities/userassets.json"
     };
 
