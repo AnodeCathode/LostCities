@@ -1,13 +1,13 @@
 [
 {
-  "modid": "lostcities_tnfc",
-  "name": "The Lost Cities",
-  "description": "The Lost Cities World Generator",
+  "modid": "lostcities_tfc",
+  "name": "The Lost Cities - TFC Edition",
+  "description": "The Lost Cities TFC Edition",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["McJty"],
+  "authorList": ["McJty", "AnodeCathode"],
   "credits": "",
   "logoFile": "",
   "screenshots": [],

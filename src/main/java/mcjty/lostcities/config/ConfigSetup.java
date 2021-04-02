@@ -16,7 +16,7 @@ public class ConfigSetup {
     public static Map<String, Configuration> profileConfigs = new HashMap<>();
 
     public static void init() {
-        mainConfig = new Configuration(new File(ModSetup.modConfigDir.getPath() + File.separator + "lostcities", "general.cfg"));
+        mainConfig = new Configuration(new File(ModSetup.modConfigDir.getPath() + File.separator + "lostcities_tfc", "general.cfg"));
         Configuration cfg = mainConfig;
         try {
             cfg.load();
@@ -43,7 +43,7 @@ public class ConfigSetup {
     private static void initProfiles(String[] profileList, boolean isPublic) {
         for (String name : profileList) {
             LostCityProfile profile = new LostCityProfile(name, LostCityConfiguration.standardProfiles.get(name), isPublic);
-            Configuration profileCfg = new Configuration(new File(ModSetup.modConfigDir.getPath() + File.separator + "lostcities", "profile_" + name + ".cfg"));
+            Configuration profileCfg = new Configuration(new File(ModSetup.modConfigDir.getPath() + File.separator + "lostcities_tfc", "profile_" + name + ".cfg"));
             profileCfg.load();
             profile.init(profileCfg);
             LostCityConfiguration.profiles.put(name, profile);

@@ -35,7 +35,7 @@ public class ModSetup {
 
     public void preInit(FMLPreInitializationEvent e) {
         logger = e.getModLog();
-        PacketHandler.registerMessages("lostcities");
+        PacketHandler.registerMessages("lostcities_tfc");
 
         setupModCompat();
 

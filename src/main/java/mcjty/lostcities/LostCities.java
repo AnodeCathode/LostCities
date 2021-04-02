@@ -22,7 +22,7 @@ import java.util.function.Function;
         version = LostCities.VERSION)
 
 public class LostCities {
-    public static final String MODID = "lostcities_tnfc";
+    public static final String MODID = "lostcities_tfc";
     public static final String VERSION = "12.2.66";
     public static final String MIN_FORGE11_VER = "13.19.0.2176";
 
@@ -30,7 +30,7 @@ public class LostCities {
     public static IProxy proxy;
     public static ModSetup setup = new ModSetup();
 
-    @Mod.Instance("lostcities")
+    @Mod.Instance("lostcities_tfc")
     public static LostCities instance;
 
     public static LostCitiesImp lostCitiesImp = new LostCitiesImp();

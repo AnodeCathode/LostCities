@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class LostWorldType extends WorldType {
 
     public LostWorldType() {
-        super("lostcities");
+        super("lostcities_tfc");
     }
 
     public LostWorldType(String name) {
