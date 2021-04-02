@@ -14,6 +14,9 @@ import mcjty.lostcities.dimensions.world.lost.*;
 import mcjty.lostcities.dimensions.world.lost.cityassets.*;
 import mcjty.lostcities.varia.ChunkCoord;
 import mcjty.lostcities.varia.GeometryTools;
+import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
+
 import net.minecraft.block.*;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
@@ -197,7 +200,7 @@ public class LostCitiesTerrainGenerator extends NormalTerrainGenerator {
             airChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.AIR.getDefaultState());
             hardAirChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.COMMAND_BLOCK.getDefaultState());
             glowstoneChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.GLOWSTONE.getDefaultState());
-            gravelChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.GRAVEL.getDefaultState());
+            gravelChar = (char) Block.BLOCK_STATE_IDS.get(BlockRockVariant.get(Rock.BASALT, Rock.Type.GRAVEL).getDefaultState());
 
             baseChar = (char) Block.BLOCK_STATE_IDS.get(profile.getBaseBlock());
             liquidChar = (char) Block.BLOCK_STATE_IDS.get(profile.getLiquidBlock());
@@ -215,7 +218,7 @@ public class LostCitiesTerrainGenerator extends NormalTerrainGenerator {
                     .withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE));
 
             ironbarsChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.IRON_BARS.getDefaultState());
-            grassChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.GRASS.getDefaultState());
+            grassChar = (char) Block.BLOCK_STATE_IDS.get(BlockRockVariant.get(Rock.BASALT, Rock.Type.GRASS).getDefaultState());
             bedrockChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.BEDROCK.getDefaultState());
             endportalChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.END_PORTAL.getDefaultState());
             endportalFrameChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.END_PORTAL_FRAME.getDefaultState());

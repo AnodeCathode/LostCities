@@ -10,6 +10,11 @@ import mcjty.lostcities.dimensions.world.terraingen.LostCitiesTerrainGenerator;
 import mcjty.lostcities.varia.ChunkCoord;
 import mcjty.lostcities.varia.Counter;
 import mcjty.lostcities.varia.QualityRandom;
+import net.dries007.tfc.api.registries.TFCRegistries;
+import net.dries007.tfc.api.types.Tree;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import net.dries007.tfc.objects.blocks.wood.BlockDoorTFC;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -1079,30 +1084,79 @@ public class BuildingInfo implements ILostChunkInfo {
 
     private Block getRandomDoor(Random rand) {
         Block doorBlock;
-        switch (rand.nextInt(7)) {
+        switch (rand.nextInt(15)) {
             case 0:
-                doorBlock = Blocks.BIRCH_DOOR;
+                //doorBlock = Blocks.BIRCH_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(0);
                 break;
             case 1:
-                doorBlock = Blocks.ACACIA_DOOR;
+                //doorBlock = Blocks.ACACIA_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(1);
                 break;
             case 2:
-                doorBlock = Blocks.DARK_OAK_DOOR;
+                //doorBlock = Blocks.DARK_OAK_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(2);
                 break;
             case 3:
-                doorBlock = Blocks.SPRUCE_DOOR;
+                //doorBlock = Blocks.SPRUCE_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(3);
                 break;
             case 4:
-                doorBlock = Blocks.OAK_DOOR;
+                //doorBlock = Blocks.OAK_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(4);
                 break;
             case 5:
-                doorBlock = Blocks.JUNGLE_DOOR;
+                //doorBlock = Blocks.JUNGLE_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(5);
                 break;
             case 6:
-                doorBlock = Blocks.IRON_DOOR;
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(6);
                 break;
+            case 7:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(7);
+                break;
+
+            case 8:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(8);
+                break;
+
+            case 9:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(9);
+                break;
+
+            case 10:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(10);
+                break;
+
+            case 11:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(11);
+                break;
+            case 12:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(12);
+                break;
+            case 13:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(13);
+                break;
+            case 14:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(14);
+                break;
+            case 15:
+                //doorBlock = Blocks.IRON_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(15);
+                break;
+
             default:
-                doorBlock = Blocks.OAK_DOOR;
+                //doorBlock = Blocks.OAK_DOOR;
+                doorBlock = BlocksTFC.getAllDoorBlocks().get(1);
         }
         return doorBlock;
     }

@@ -142,7 +142,7 @@
       },
       {
         "char": "$",
-        "block": "minecraft:double_stone_slab",
+        "block": "tfc:smooth/marble",
         "damaged": "minecraft:iron_bars"
       },
       {
@@ -150,15 +150,15 @@
         "blocks": [
           {
             "random": 9,
-            "block": "minecraft:stonebrick@2"
+            "block": "tfc:bricks/basalt"
           },
           {
             "random": 8,
-            "block": "minecraft:stonebrick@1"
+            "block": "tfc:smooth/marble"
           },
           {
             "random": 1000,
-            "block": "minecraft:stonebrick"
+            "block": "tfc:smooth/basalt"
           }
         ],
         "damaged": "minecraft:iron_bars"
@@ -171,7 +171,7 @@
     "palette": [
       {
         "char": "X",
-        "block": "minecraft:stained_hardened_clay@9",
+        "block": "tfc:alabaster/raw/lime",
         "damaged": "minecraft:iron_bars"
       },
       {
@@ -181,7 +181,7 @@
       },
       {
         "char": "#",
-        "block": "minecraft:stained_hardened_clay@9",
+        "block": "tfc:alabaster/raw/lime",
         "damaged": "minecraft:iron_bars"
       }
     ]
@@ -213,17 +213,17 @@
     "palette": [
       {
         "char": "X",
-        "block": "minecraft:stained_hardened_clay@8",
+        "block": "tfc:brick/marble",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "$",
-        "block": "minecraft:stained_hardened_clay@12",
+        "block": "tfc:smooth/marble",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "#",
-        "block": "minecraft:stained_hardened_clay@8",
+        "block": "tfc:raw/marble",
         "damaged": "minecraft:iron_bars"
       }
     ]
@@ -244,7 +244,7 @@
     "palette": [
       {
         "char": "@",
-        "block": "minecraft:double_stone_slab",
+        "block": "tfc:smooth/basalt",
         "damaged": "minecraft:iron_bars"
       }
     ]
@@ -265,7 +265,7 @@
     "palette": [
       {
         "char": "@",
-        "block": "minecraft:quartz_block",
+        "block": "tfc:raw/quartzite",
         "damaged": "minecraft:iron_bars"
       }
     ]
@@ -456,31 +456,31 @@
     "palette": [
       {
         "char": "R",
-        "block": "minecraft:stained_hardened_clay@9",
+        "block": "tfc:alabaster/bricks/gray",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "Q",
-        "block": "minecraft:quartz_block",
+        "block": "tfc:raw/quartzite",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "u",
-        "block": "minecraft:double_stone_slab",
+        "block": "tfc:smooth/basalt",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "S",
-        "block": "minecraft:double_stone_slab",
+        "block": "tfc:smooth/basalt",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "b",
-        "block": "minecraft:stone"
+        "block": "tfc:raw/basalt"
       },
       {
         "char": "B",
-        "block": "minecraft:brick_block",
+        "block": "tfc:alabaster/polished/silver",
         "damaged": "minecraft:iron_bars"
       },
       {
@@ -488,15 +488,15 @@
         "blocks": [
           {
             "random": 9,
-            "block": "minecraft:stonebrick@2"
+            "block": "tfc:smooth/andesite"
           },
           {
             "random": 8,
-            "block": "minecraft:stonebrick@1"
+            "block": "tfc:smooth/marble"
           },
           {
             "random": 1000,
-            "block": "minecraft:stonebrick"
+            "block": "tfc:smooth/basalt"
           }
         ],
         "damaged": "minecraft:iron_bars"
@@ -506,15 +506,15 @@
         "blocks": [
           {
             "random": 9,
-            "block": "minecraft:stonebrick@2"
+            "block": "tfc:smooth/andesite"
           },
           {
             "random": 8,
-            "block": "minecraft:stonebrick@1"
+            "block": "tfc:smooth/marble"
           },
           {
             "random": 1000,
-            "block": "minecraft:stonebrick"
+            "block": "tfc:smooth/basalt"
           }
         ],
         "damaged": "minecraft:iron_bars"
@@ -524,30 +524,30 @@
         "blocks": [
           {
             "random": 9,
-            "block": "minecraft:stonebrick@2"
+            "block": "tfc:smooth/andesite"
           },
           {
             "random": 8,
-            "block": "minecraft:stonebrick@1"
+            "block": "tfc:smooth/marble"
           },
           {
             "random": 1000,
-            "block": "minecraft:stonebrick"
+            "block": "tfc:smooth/basalt"
           }
         ],
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "_",
-        "block": "minecraft:stone_slab"
+        "block": "tfc:slab/cobble/basalt"
       },
       {
         "char": "=",
-        "block": "minecraft:stone_slab@8"
+        "block": "tfc:slab/cobble/granite"
       },
       {
         "char": "w",
-        "block": "minecraft:cobblestone_wall"
+        "block": "tfc:wall/bricks/basalt"
       },
       {
         "char": ":",
@@ -555,35 +555,35 @@
       },
       {
         "char": "A",
-        "block": "minecraft:stone_brick_stairs@1"
+        "block": "tfc:stairs/bricks/marble@1"
       },
       {
         "char": "t",
-        "block": "minecraft:stone_brick_stairs@0"
+        "block": "tfc:stairs/bricks/marble@0"
       },
       {
         "char": "z",
-        "block": "minecraft:stone_brick_stairs@3"
+        "block": "tfc:stairs/bricks/marble@3"
       },
       {
         "char": "c",
-        "block": "minecraft:stone_brick_stairs@2"
+        "block": "tfc:stairs/bricks/marble@2"
       },
       {
         "char": "d",
-        "block": "minecraft:stone_brick_stairs@7"
+        "block": "tfc:stairs/bricks/marble@7"
       },
       {
         "char": "(",
-        "block": "minecraft:quartz_stairs@3"
+        "block": "tfc:stairs/bricks/quartzite@3"
       },
       {
         "char": ")",
-        "block": "minecraft:quartz_stairs@2"
+        "block": "tfc:stairs/bricks/quartzite@2"
       },
       {
         "char": "/",
-        "block": "minecraft:stone_stairs@1"
+        "block": "tfc:stairs/bricks/andesite@1"
       }
     ]
   }

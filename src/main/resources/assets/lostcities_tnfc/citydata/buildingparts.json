@@ -2733,7 +2733,7 @@
     "palette": [
       {
         "char": "o",
-        "block": "minecraft:planks"
+        "block": "tfc:wood/planks/maple"
       }
     ],
     "slices": [

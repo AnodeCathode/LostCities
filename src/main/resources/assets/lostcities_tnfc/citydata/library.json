@@ -91,7 +91,7 @@
         "blocks": [
           {
             "random": 32,
-            "block": "minecraft:stained_hardened_clay@9"
+            "block": "tfc:alabaster/raw/lime"
           },
           {
             "random": 32,
@@ -137,27 +137,27 @@
         "blocks": [
           {
             "random": 30,
-            "block": "minecraft:red_flower"
+            "block": "tfc:plants/rose"
           },
           {
             "random": 30,
-            "block": "minecraft:yellow_flower"
+            "block": "tfc:plants/dandelion"
           },
           {
             "random": 15,
-            "block": "minecraft:sapling"
+            "block": "tfc:wood/sapling/sycamore"
           },
           {
             "random": 15,
-            "block": "minecraft:sapling@1"
+            "block": "tfc:wood/sapling/chestnut"
           },
           {
             "random": 15,
-            "block": "minecraft:sapling@2"
+            "block": "tfc:wood/sapling/rosewood"
           },
           {
             "random": 1000,
-            "block": "minecraft:sapling@4"
+            "block": "tfc:wood/sapling/oak"
           }
         ]
       },
@@ -166,11 +166,11 @@
         "blocks": [
           {
             "random": 64,
-            "block": "minecraft:red_flower"
+            "block": "tfc:plants/rose"
           },
           {
             "random": 1000,
-            "block": "minecraft:yellow_flower"
+            "block": "tfc:plants/dandelion"
           }
         ]
       },
@@ -179,7 +179,7 @@
         "blocks": [
           {
             "random": 15,
-            "block": "minecraft:diamond_block"
+            "block": "immersiveengineering:storage:4"
           },
           {
             "random": 20,
@@ -187,7 +187,7 @@
           },
           {
             "random": 15,
-            "block": "minecraft:emerald_block"
+            "block": "immersiveengineering:storage:3"
           },
           {
             "random": 1000,
@@ -199,28 +199,28 @@
         "char": "F",
         "blocks": [
           {
-            "random": 25,
-            "block": "minecraft:furnace"
-          },
-          {
-            "random": 20,
-            "block": "minecraft:crafting_table"
-          },
-          {
-            "random": 7,
-            "block": "minecraft:brewing_stand"
-          },
-          {
-            "random": 6,
-            "block": "minecraft:anvil"
-          },
-          {
-            "random": 5,
-            "block": "minecraft:cauldron"
+            "random": 2,
+            "block": "advancedrocketry:satellitebuilder"
           },
           {
             "random": 2,
-            "block": "minecraft:enchanting_table"
+            "block": "minecraft:anvil"
+          },
+          {
+            "random": 2,
+            "block": "xnet:controller"
+          },
+          {
+            "random": 2,
+            "block": "betterwithmods:infernal_enchanter"
+          },
+          {
+            "random": 5,
+            "block": "storagedrawers:compdrawers"
+          },
+          {
+            "random": 20,
+            "block": "tfc:wood/workbench/rosewood"
           },
           {
             "random": 1000,
@@ -251,32 +251,32 @@
       },
       {
         "char": "-",
-        "block": "minecraft:wooden_pressure_plate"
+        "block": "tfc:stone/pressure_plate/basalt"
       },
       {
         "char": ".",
-        "block": "minecraft:fence"
+        "block": "tfc:wood/fence/blackwood"
       },
       {
         "char": "L",
-        "block": "minecraft:bookshelf"
+        "block": "tfc:wood/bookshelf/blackwood"
       },
       {
         "char": "W",
-        "block": "minecraft:water"
+        "block": "tfc:fluid/fresh_water"
       },
       {
         "char": "C",
-        "block": "minecraft:chest",
+        "block": "tfc:wood/chest/acacia",
         "loot": "chestloot"
       },
       {
         "char": "G",
-        "block": "minecraft:grass"
+        "block": "tfc:dry_grass/basalt"
       },
       {
         "char": "D",
-        "block": "minecraft:dirt"
+        "block": "tfc:dirt/basalt"
       },
       {
         "char": " ",
