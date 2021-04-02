@@ -18,7 +18,7 @@ import java.util.function.Function;
 
 @Mod(modid = LostCities.MODID, name="The Lost Cities",
         dependencies =
-                        "after:forge@[" + LostCities.MIN_FORGE11_VER + ",)",
+                        "required-after:tfc;after:forge@[" + LostCities.MIN_FORGE11_VER + ",)",
         version = LostCities.VERSION)
 
 public class LostCities {
