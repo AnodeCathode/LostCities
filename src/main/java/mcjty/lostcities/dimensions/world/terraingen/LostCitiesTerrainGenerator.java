@@ -15,6 +15,7 @@ import mcjty.lostcities.dimensions.world.lost.cityassets.*;
 import mcjty.lostcities.varia.ChunkCoord;
 import mcjty.lostcities.varia.GeometryTools;
 import net.dries007.tfc.api.types.Rock;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
 import net.dries007.tfc.objects.blocks.stone.BlockRockVariant;
 
 import net.minecraft.block.*;
@@ -208,14 +209,10 @@ public class LostCitiesTerrainGenerator extends NormalTerrainGenerator {
             // @todo
             glassChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.GLASS.getDefaultState());
 
-            leavesChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.LEAVES.getDefaultState()
-                    .withProperty(BlockLeaves.DECAYABLE, false));
-            leaves2Char = (char) Block.BLOCK_STATE_IDS.get(Blocks.LEAVES.getDefaultState()
-                    .withProperty(BlockLeaves.DECAYABLE, false)
-                    .withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
-            leaves3Char = (char) Block.BLOCK_STATE_IDS.get(Blocks.LEAVES.getDefaultState()
-                    .withProperty(BlockLeaves.DECAYABLE, false)
-                    .withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.SPRUCE));
+            leavesChar = (char) Block.BLOCK_STATE_IDS.get(BlocksTFC.getAllLeafBlocks().get(0).getDefaultState());
+            leaves2Char = (char) Block.BLOCK_STATE_IDS.get(BlocksTFC.getAllLeafBlocks().get(1).getDefaultState());
+
+            leaves3Char = (char) Block.BLOCK_STATE_IDS.get(BlocksTFC.getAllLeafBlocks().get(2).getDefaultState());
 
             ironbarsChar = (char) Block.BLOCK_STATE_IDS.get(Blocks.IRON_BARS.getDefaultState());
             grassChar = (char) Block.BLOCK_STATE_IDS.get(BlockRockVariant.get(Rock.BASALT, Rock.Type.GRASS).getDefaultState());
