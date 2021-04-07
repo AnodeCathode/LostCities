@@ -204,7 +204,7 @@
       },
       {
         "char": "R",
-        "block": "tfc:alabaster/raw/lime",
+        "block": "tfc:alabaster/bricks/silver",
         "damaged": "minecraft:iron_bars"
       },
       {
@@ -219,7 +219,7 @@
       },
       {
         "char": "b",
-        "block": "tfc:raw/basalt"
+        "block": "tfc:bricks/basalt"
       },
       {
         "char": "B",

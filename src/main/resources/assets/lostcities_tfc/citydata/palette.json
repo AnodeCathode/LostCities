@@ -171,7 +171,7 @@
     "palette": [
       {
         "char": "X",
-        "block": "tfc:alabaster/raw/lime",
+        "block": "tfc:alabaster/raw/black",
         "damaged": "minecraft:iron_bars"
       },
       {
@@ -181,7 +181,7 @@
       },
       {
         "char": "#",
-        "block": "tfc:alabaster/raw/lime",
+        "block": "tfc:alabaster/raw/black",
         "damaged": "minecraft:iron_bars"
       }
     ]
@@ -192,17 +192,17 @@
     "palette": [
       {
         "char": "X",
-        "block": "minecraft:stained_hardened_clay@7",
+        "block": "tfc:alabaster/bricks/gray",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "$",
-        "block": "minecraft:stained_hardened_clay@15",
+        "block": "tfc:alabaster/raw/gray",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "#",
-        "block": "minecraft:stained_hardened_clay@7",
+        "block": "tfc:alabaster/polished/gray",
         "damaged": "minecraft:iron_bars"
       }
     ]
@@ -213,17 +213,17 @@
     "palette": [
       {
         "char": "X",
-        "block": "tfc:brick/marble",
+        "block": "tfc:alabaster/bricks/silver",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "$",
-        "block": "tfc:smooth/marble",
+        "block": "tfc:alabaster/raw/silver",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "#",
-        "block": "tfc:raw/marble",
+        "block": "tfc:alabaster/polished/gray",
         "damaged": "minecraft:iron_bars"
       }
     ]
@@ -456,17 +456,17 @@
     "palette": [
       {
         "char": "R",
-        "block": "tfc:alabaster/bricks/gray",
+        "block": "tfc:alabaster/bricks/silver",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "Q",
-        "block": "tfc:raw/quartzite",
+        "block": "tfc:smooth/quartzite",
         "damaged": "minecraft:iron_bars"
       },
       {
         "char": "u",
-        "block": "tfc:smooth/basalt",
+        "block": "tfc:brick/basalt",
         "damaged": "minecraft:iron_bars"
       },
       {
@@ -476,7 +476,7 @@
       },
       {
         "char": "b",
-        "block": "tfc:raw/basalt"
+        "block": "tfc:alabaster/polished/black"
       },
       {
         "char": "B",
@@ -524,15 +524,15 @@
         "blocks": [
           {
             "random": 9,
-            "block": "tfc:smooth/andesite"
+            "block": "tfc:brick/andesite"
           },
           {
             "random": 8,
-            "block": "tfc:smooth/marble"
+            "block": "tfc:brick/marble"
           },
           {
             "random": 1000,
-            "block": "tfc:smooth/basalt"
+            "block": "tfc:brick/basalt"
           }
         ],
         "damaged": "minecraft:iron_bars"
@@ -547,7 +547,7 @@
       },
       {
         "char": "w",
-        "block": "tfc:wall/bricks/basalt"
+        "block": "tfc:wall/bricks/marble"
       },
       {
         "char": ":",
