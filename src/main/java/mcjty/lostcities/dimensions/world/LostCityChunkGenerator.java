@@ -65,7 +65,8 @@ import java.util.Random;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
 
-public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenerator {
+public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenerator
+{
 
     private LostCityProfile profile; // Current profile
     private LostCityProfile outsideProfile; // Outside profile: only for citySphere worlds
@@ -100,19 +101,23 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
     private MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();
     private LostWoodlandMansion woodlandMansionGenerator = new LostWoodlandMansion(this);
 
-    public ChunkGeneratorSettings getSettings() {
-        if (settings == null) {
+    public ChunkGeneratorSettings getSettings()
+    {
+        if (settings == null)
+        {
             ChunkGeneratorSettings.Factory factory = new ChunkGeneratorSettings.Factory();
             settings = factory.build();
         }
         return settings;
     }
 
-    public LostCityProfile getProfile() {
+    public LostCityProfile getProfile()
+    {
         return profile;
     }
 
-    public LostCityProfile getOutsideProfile() {
+    public LostCityProfile getOutsideProfile()
+    {
         return outsideProfile;
     }
 
@@ -121,12 +126,14 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
 
     public IChunkPrimerFactory otherGenerator = null;
 
-    public LostCityChunkGenerator(World world, IChunkPrimerFactory otherGenerator) {
+    public LostCityChunkGenerator(World world, IChunkPrimerFactory otherGenerator)
+    {
         this(world, world.getSeed());
         this.otherGenerator = otherGenerator;
     }
 
-    public LostCityChunkGenerator(World world, long seed) {
+    public LostCityChunkGenerator(World world, long seed)
+    {
 
         WorldTypeTools.registerChunkGenerator(world.provider.getDimension(), this);
 
@@ -142,19 +149,24 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
 
         dimensionId = world.provider.getDimension();
         profile = WorldTypeTools.getProfile(world);
-        if (profile.isSpace() && !profile.CITYSPHERE_OUTSIDE_PROFILE.isEmpty()) {
+        if (profile.isSpace() && !profile.CITYSPHERE_OUTSIDE_PROFILE.isEmpty())
+        {
             outsideProfile = LostCityConfiguration.profiles.get(profile.CITYSPHERE_OUTSIDE_PROFILE);
-        } else {
+        }
+        else
+        {
             outsideProfile = profile;
         }
 
         worldStyle = AssetRegistries.WORLDSTYLES.get(profile.getWorldStyle());
-        if (worldStyle == null) {
+        if (worldStyle == null)
+        {
             throw new RuntimeException("Unknown worldstyle '" + profile.getWorldStyle() + "'!");
         }
 
         String generatorOptions = profile.GENERATOR_OPTIONS;
-        if (generatorOptions != null && !generatorOptions.isEmpty()) {
+        if (generatorOptions != null && !generatorOptions.isEmpty())
+        {
             this.settings = ChunkGeneratorSettings.Factory.jsonToFactory(generatorOptions).build();
         }
 
@@ -166,7 +178,8 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         this.rand = new Random((seed + 516) * 314);
 
         int waterLevel = (byte) (profile.GROUNDLEVEL - profile.WATERLEVEL_OFFSET);
-        if (waterLevel <= 0) {
+        if (waterLevel <= 0)
+        {
             waterLevel = 1;
         }
         world.setSeaLevel(waterLevel);
@@ -175,25 +188,33 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         terrainGenerator.setup(world);
     }
 
-    public ChunkPrimer generatePrimer(int chunkX, int chunkZ) {
+    public ChunkPrimer generatePrimer(int chunkX, int chunkZ)
+    {
         this.rand.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
 
-        if (otherGenerator != null) {
+        if (otherGenerator != null)
+        {
             // For ATG, experimental
             otherGenerator.fillChunk(chunkX, chunkZ, chunkprimer);
-        } else {
+        }
+        else
+        {
             terrainGenerator.doCoreChunk(chunkX, chunkZ, chunkprimer);
         }
         return chunkprimer;
     }
 
     // Get a heightmap for a chunk. If needed calculate (and cache) a primer
-    public ChunkHeightmap getHeightmap(int chunkX, int chunkZ) {
+    public ChunkHeightmap getHeightmap(int chunkX, int chunkZ)
+    {
         ChunkCoord key = new ChunkCoord(worldObj.provider.getDimension(), chunkX, chunkZ);
-        if (cachedHeightmaps.containsKey(key)) {
+        if (cachedHeightmaps.containsKey(key))
+        {
             return cachedHeightmaps.get(key);
-        } else if (cachedPrimers.containsKey(key)) {
+        }
+        else if (cachedPrimers.containsKey(key))
+        {
             char baseChar = (char) Block.BLOCK_STATE_IDS.get(profile.getBaseBlock());
             ChunkPrimer primer = cachedPrimers.get(key);
             IPrimerDriver driver = LostCityConfiguration.OPTIMIZED_CHUNKGEN ? new OptimizedDriver() : new SafeDriver();
@@ -201,7 +222,9 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
             ChunkHeightmap heightmap = new ChunkHeightmap(driver, profile.LANDSCAPE_TYPE, profile.GROUNDLEVEL, baseChar);
             cachedHeightmaps.put(key, heightmap);
             return heightmap;
-        } else {
+        }
+        else
+        {
             ChunkPrimer primer = generatePrimer(chunkX, chunkZ);
             cachedPrimers.put(key, primer);
             char baseChar = (char) Block.BLOCK_STATE_IDS.get(profile.getBaseBlock());
@@ -214,9 +237,9 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
     }
 
 
-
     @Override
-    public Chunk generateChunk(int chunkX, int chunkZ) {
+    public Chunk generateChunk(int chunkX, int chunkZ)
+    {
         LostCityProfile profile = BuildingInfo.getProfile(chunkX, chunkZ, this);
 
         terrainGenerator.setupChars(profile);
@@ -224,9 +247,12 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
 
         ChunkPrimer chunkprimer = getChunkPrimer(chunkX, chunkZ, isCity);
 
-        try {
+        try
+        {
             terrainGenerator.generate(chunkX, chunkZ, chunkprimer);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             LostCities.setup.getLogger().error("An exception occured while generating chunk: " + chunkX + "," + chunkZ, e);
             BuildingInfo info = BuildingInfo.getBuildingInfo(chunkX, chunkZ, this);
             LostCities.setup.getLogger().error("    Chunk profile: " + info.profile.getName());
@@ -243,49 +269,63 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         this.biomesForGeneration = biomeProvider.getBiomes(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
         terrainGenerator.replaceBlocksForBiome(chunkX, chunkZ, chunkprimer, this.biomesForGeneration);
 
-        if (profile.GENERATE_CAVES) {
+        if (profile.GENERATE_CAVES)
+        {
             this.caveGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
         }
-        if (profile.GENERATE_RAVINES) {
-            if (!profile.PREVENT_LAKES_RAVINES_IN_CITIES || !isCity) {
+        if (profile.GENERATE_RAVINES)
+        {
+            if (!profile.PREVENT_LAKES_RAVINES_IN_CITIES || !isCity)
+            {
                 this.ravineGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
             }
         }
 
-        if (profile.GENERATE_MINESHAFTS) {
+        if (profile.GENERATE_MINESHAFTS)
+        {
             this.mineshaftGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
         }
 
-        if (profile.GENERATE_VILLAGES) {
-            if (profile.PREVENT_VILLAGES_IN_CITIES) {
-                if (!isCity) {
+        if (profile.GENERATE_VILLAGES)
+        {
+            if (profile.PREVENT_VILLAGES_IN_CITIES)
+            {
+                if (!isCity)
+                {
                     this.villageGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
                 }
-            } else {
+            }
+            else
+            {
                 this.villageGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
             }
         }
 
-        if (profile.GENERATE_STRONGHOLDS) {
+        if (profile.GENERATE_STRONGHOLDS)
+        {
             this.strongholdGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
         }
 
-        if (profile.GENERATE_SCATTERED) {
+        if (profile.GENERATE_SCATTERED)
+        {
             this.scatteredFeatureGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
         }
 
-        if (profile.GENERATE_OCEANMONUMENTS) {
+        if (profile.GENERATE_OCEANMONUMENTS)
+        {
             this.oceanMonumentGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
         }
 
-        if (profile.GENERATE_MANSIONS) {
+        if (profile.GENERATE_MANSIONS)
+        {
             this.woodlandMansionGenerator.generate(this.worldObj, chunkX, chunkZ, chunkprimer);
         }
 
         Chunk chunk = new Chunk(this.worldObj, chunkprimer, chunkX, chunkZ);
         byte[] abyte = chunk.getBiomeArray();
 
-        for (int i = 0; i < abyte.length; ++i) {
+        for (int i = 0; i < abyte.length; ++i)
+        {
             abyte[i] = (byte) Biome.getIdForBiome(this.biomesForGeneration[i]);
         }
 
@@ -294,21 +334,29 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         return chunk;
     }
 
-    public ChunkPrimer getChunkPrimer(int chunkX, int chunkZ, boolean isCity) {
+    public ChunkPrimer getChunkPrimer(int chunkX, int chunkZ, boolean isCity)
+    {
         ChunkPrimer chunkprimer;
-        if (isCity && profile.isDefault()) {  // Generate a normal chunk if we have a floating city
+        if (isCity && profile.isDefault())
+        {  // Generate a normal chunk if we have a floating city
             chunkprimer = new ChunkPrimer();
-        } else {
+        }
+        else
+        {
             ChunkCoord key = new ChunkCoord(worldObj.provider.getDimension(), chunkX, chunkZ);
-            if (cachedPrimers.containsKey(key)) {
+            if (cachedPrimers.containsKey(key))
+            {
                 // We calculated a primer earlier. Reuse it
                 chunkprimer = cachedPrimers.get(key);
                 cachedPrimers.remove(key);
-            } else {
+            }
+            else
+            {
                 chunkprimer = generatePrimer(chunkX, chunkZ);
             }
             // Calculate the chunk heightmap in case we need it later
-            if (!cachedHeightmaps.containsKey(key)) {
+            if (!cachedHeightmaps.containsKey(key))
+            {
                 // We might need this later
                 char baseChar = (char) Block.BLOCK_STATE_IDS.get(profile.getBaseBlock());
                 IPrimerDriver driver = LostCityConfiguration.OPTIMIZED_CHUNKGEN ? new OptimizedDriver() : new SafeDriver();
@@ -319,62 +367,82 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         return chunkprimer;
     }
 
-    private void generateTrees(Random random, int chunkX, int chunkZ, World world, LostCityChunkGenerator provider) {
+    private void generateTrees(Random random, int chunkX, int chunkZ, World world, LostCityChunkGenerator provider)
+    {
         BuildingInfo info = BuildingInfo.getBuildingInfo(chunkX, chunkZ, provider);
-        for (BlockPos pos : info.getSaplingTodo()) {
+        for (BlockPos pos : info.getSaplingTodo())
+        {
             IBlockState state = world.getBlockState(pos);
-            if (state.getBlock() == Blocks.SAPLING) {
-                ((BlockSapling)Blocks.SAPLING).generateTree(world, pos, state, random);
+            if (state.getBlock() == Blocks.SAPLING)
+            {
+                ((BlockSapling) Blocks.SAPLING).generateTree(world, pos, state, random);
             }
         }
         info.clearSaplingTodo();
     }
 
-    private void generateVines(Random random, int chunkX, int chunkZ, World world, LostCityChunkGenerator provider) {
+    private void generateVines(Random random, int chunkX, int chunkZ, World world, LostCityChunkGenerator provider)
+    {
         int cx = chunkX * 16;
         int cz = chunkZ * 16;
         BuildingInfo info = BuildingInfo.getBuildingInfo(chunkX, chunkZ, provider);
 
-        if (info.hasBuilding) {
+        if (info.hasBuilding)
+        {
             BuildingInfo adjacent = info.getXmax();
             int bottom = Math.max(adjacent.getCityGroundLevel() + 3, adjacent.hasBuilding ? adjacent.getMaxHeight() : (adjacent.getCityGroundLevel() + 3));
-            for (int z = 0; z < 15; z++) {
-                for (int y = bottom; y < (info.getMaxHeight()); y++) {
-                    if (random.nextFloat() < provider.profile.VINE_CHANCE) {
+            for (int z = 0; z < 15; z++)
+            {
+                for (int y = bottom; y < (info.getMaxHeight()); y++)
+                {
+                    if (random.nextFloat() < provider.profile.VINE_CHANCE)
+                    {
                         createVineStrip(random, world, bottom, BlockVine.WEST, new BlockPos(cx + 16, y, cz + z), new BlockPos(cx + 15, y, cz + z));
                     }
                 }
             }
         }
-        if (info.getXmax().hasBuilding) {
+        if (info.getXmax().hasBuilding)
+        {
             BuildingInfo adjacent = info.getXmax();
             int bottom = Math.max(info.getCityGroundLevel() + 3, info.hasBuilding ? info.getMaxHeight() : (info.getCityGroundLevel() + 3));
-            for (int z = 0; z < 15; z++) {
-                for (int y = bottom; y < (adjacent.getMaxHeight()); y++) {
-                    if (random.nextFloat() < provider.profile.VINE_CHANCE) {
+            for (int z = 0; z < 15; z++)
+            {
+                for (int y = bottom; y < (adjacent.getMaxHeight()); y++)
+                {
+                    if (random.nextFloat() < provider.profile.VINE_CHANCE)
+                    {
                         createVineStrip(random, world, bottom, BlockVine.EAST, new BlockPos(cx + 15, y, cz + z), new BlockPos(cx + 16, y, cz + z));
                     }
                 }
             }
         }
 
-        if (info.hasBuilding) {
+        if (info.hasBuilding)
+        {
             BuildingInfo adjacent = info.getZmax();
             int bottom = Math.max(adjacent.getCityGroundLevel() + 3, adjacent.hasBuilding ? adjacent.getMaxHeight() : (adjacent.getCityGroundLevel() + 3));
-            for (int x = 0; x < 15; x++) {
-                for (int y = bottom; y < (info.getMaxHeight()); y++) {
-                    if (random.nextFloat() < provider.profile.VINE_CHANCE) {
+            for (int x = 0; x < 15; x++)
+            {
+                for (int y = bottom; y < (info.getMaxHeight()); y++)
+                {
+                    if (random.nextFloat() < provider.profile.VINE_CHANCE)
+                    {
                         createVineStrip(random, world, bottom, BlockVine.NORTH, new BlockPos(cx + x, y, cz + 16), new BlockPos(cx + x, y, cz + 15));
                     }
                 }
             }
         }
-        if (info.getZmax().hasBuilding) {
+        if (info.getZmax().hasBuilding)
+        {
             BuildingInfo adjacent = info.getZmax();
             int bottom = Math.max(info.getCityGroundLevel() + 3, info.hasBuilding ? info.getMaxHeight() : (info.getCityGroundLevel() + 3));
-            for (int x = 0; x < 15; x++) {
-                for (int y = bottom; y < (adjacent.getMaxHeight()); y++) {
-                    if (random.nextFloat() < provider.profile.VINE_CHANCE) {
+            for (int x = 0; x < 15; x++)
+            {
+                for (int y = bottom; y < (adjacent.getMaxHeight()); y++)
+                {
+                    if (random.nextFloat() < provider.profile.VINE_CHANCE)
+                    {
                         createVineStrip(random, world, bottom, BlockVine.SOUTH, new BlockPos(cx + x, y, cz + 15), new BlockPos(cx + x, y, cz + 16));
                     }
                 }
@@ -382,17 +450,22 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         }
     }
 
-    private void createVineStrip(Random random, World world, int bottom, PropertyBool direction, BlockPos pos, BlockPos vineHolderPos) {
-        if (world.isAirBlock(vineHolderPos)) {
+    private void createVineStrip(Random random, World world, int bottom, PropertyBool direction, BlockPos pos, BlockPos vineHolderPos)
+    {
+        if (world.isAirBlock(vineHolderPos))
+        {
             return;
         }
-        if (!world.isAirBlock(pos)) {
+        if (!world.isAirBlock(pos))
+        {
             return;
         }
         world.setBlockState(pos, Blocks.VINE.getDefaultState().withProperty(direction, true));
         pos = pos.down();
-        while (pos.getY() >= bottom && random.nextFloat() < .8f) {
-            if (!world.isAirBlock(pos)) {
+        while (pos.getY() >= bottom && random.nextFloat() < .8f)
+        {
+            if (!world.isAirBlock(pos))
+            {
                 return;
             }
             world.setBlockState(pos, Blocks.VINE.getDefaultState().withProperty(direction, true));
@@ -402,7 +475,8 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
 
     private static final EntityId FIXER = new EntityId();
 
-    public static String fixEntityId(String id) {
+    public static String fixEntityId(String id)
+    {
         NBTTagCompound nbt = new NBTTagCompound();
         nbt.setString("id", id);
         nbt = FIXER.fixTagCompound(nbt);
@@ -410,50 +484,64 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
     }
 
 
-    private void generateLootSpawners(Random random, int chunkX, int chunkZ, World world, LostCityChunkGenerator chunkGenerator) {
+    private void generateLootSpawners(Random random, int chunkX, int chunkZ, World world, LostCityChunkGenerator chunkGenerator)
+    {
         BuildingInfo info = BuildingInfo.getBuildingInfo(chunkX, chunkZ, chunkGenerator);
 
-        for (Pair<BlockPos, BuildingInfo.ConditionTodo> pair : info.getMobSpawnerTodo()) {
+        for (Pair<BlockPos, BuildingInfo.ConditionTodo> pair : info.getMobSpawnerTodo())
+        {
             BlockPos pos = pair.getKey();
             // Double check that it is still a spawner (could be destroyed by explosion)
-            if (world.getBlockState(pos).getBlock() == Blocks.MOB_SPAWNER) {
+            if (world.getBlockState(pos).getBlock() == Blocks.MOB_SPAWNER)
+            {
                 TileEntity tileentity = world.getTileEntity(pos);
-                if (tileentity instanceof TileEntityMobSpawner) {
+                if (tileentity instanceof TileEntityMobSpawner)
+                {
                     TileEntityMobSpawner spawner = (TileEntityMobSpawner) tileentity;
                     BuildingInfo.ConditionTodo todo = pair.getValue();
                     String condition = todo.getCondition();
                     Condition cnd = AssetRegistries.CONDITIONS.get(condition);
-                    if (cnd == null) {
+                    if (cnd == null)
+                    {
                         throw new RuntimeException("Cannot find condition '" + condition + "'!");
                     }
                     int level = (pos.getY() - profile.GROUNDLEVEL) / 6;
                     int floor = (pos.getY() - info.getCityGroundLevel()) / 6;
                     ConditionContext conditionContext = new ConditionContext(level, floor, info.floorsBelowGround, info.getNumFloors(),
-                            todo.getPart(), todo.getBuilding(), info.chunkX, info.chunkZ) {
+                        todo.getPart(), todo.getBuilding(), info.chunkX, info.chunkZ)
+                    {
                         @Override
-                        public boolean isSphere() {
+                        public boolean isSphere()
+                        {
                             return CitySphere.isInSphere(chunkX, chunkZ, pos, LostCityChunkGenerator.this);
                         }
 
                         @Override
-                        public String getBiome() {
+                        public String getBiome()
+                        {
                             return world.getBiome(pos).getBiomeName();
                         }
                     };
                     String randomValue = cnd.getRandomValue(random, conditionContext);
-                    if (randomValue == null) {
+                    if (randomValue == null)
+                    {
                         throw new RuntimeException("Condition '" + cnd.getName() + "' did not return a valid mob!");
                     }
                     String fixedId = fixEntityId(randomValue);
                     MobSpawnerBaseLogic mobspawnerbaselogic = spawner.getSpawnerBaseLogic();
                     mobspawnerbaselogic.setEntityId(new ResourceLocation(fixedId));
                     spawner.markDirty();
-                    if (LostCityConfiguration.DEBUG) {
+                    if (LostCityConfiguration.DEBUG)
+                    {
                         LostCities.setup.getLogger().debug("generateLootSpawners: mob=" + randomValue + " pos=" + pos.toString());
                     }
-                } else if(tileentity != null) {
+                }
+                else if (tileentity != null)
+                {
                     LostCities.setup.getLogger().error("The mob spawner at (" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ") has a TileEntity of incorrect type " + tileentity.getClass().getName() + "!");
-                } else {
+                }
+                else
+                {
                     LostCities.setup.getLogger().error("The mob spawner at (" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ") is missing its TileEntity!");
                 }
             }
@@ -461,18 +549,24 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         info.clearMobSpawnerTodo();
 
 
-        for (Pair<BlockPos, BuildingInfo.ConditionTodo> pair : info.getLootTodo()) {
+        for (Pair<BlockPos, BuildingInfo.ConditionTodo> pair : info.getLootTodo())
+        {
             BlockPos pos = pair.getKey();
             // Double check that it is still something that can hold loot (could be destroyed by explosion)
             TileEntity te = world.getTileEntity(pos);
-            if (te instanceof TileEntityLockableLoot) {
-                if (chunkGenerator.profile.GENERATE_LOOT) {
+            if (te instanceof TileEntityLockableLoot)
+            {
+                if (chunkGenerator.profile.GENERATE_LOOT)
+                {
                     createLoot(info, random, world, pos, pair.getRight());
                 }
-            } else if (te == null) {
+            }
+            else if (te == null)
+            {
                 IBlockState state = world.getBlockState(pos);
                 Block block = state.getBlock();
-                if (block.hasTileEntity(state)) {
+                if (block.hasTileEntity(state))
+                {
                     LostCities.setup.getLogger().error("The block " + block.getRegistryName() + " (" + block.getClass().getName() + ") at (" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ") is missing its TileEntity!");
                 }
             }
@@ -480,7 +574,8 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         info.clearLootTodo();
 
 
-        for (BlockPos pos : info.getLightingUpdateTodo()) {
+        for (BlockPos pos : info.getLightingUpdateTodo())
+        {
             IBlockState state = world.getBlockState(pos);
             world.setBlockState(pos, state, 3);
         }
@@ -488,35 +583,44 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
     }
 
 
-    private void createLoot(BuildingInfo info, Random random, World world, BlockPos pos, BuildingInfo.ConditionTodo todo) {
-        if (random.nextFloat() < profile.CHEST_WITHOUT_LOOT_CHANCE) {
+    private void createLoot(BuildingInfo info, Random random, World world, BlockPos pos, BuildingInfo.ConditionTodo todo)
+    {
+        if (random.nextFloat() < profile.CHEST_WITHOUT_LOOT_CHANCE)
+        {
             return;
         }
         TileEntity tileentity = world.getTileEntity(pos);
-        if (tileentity instanceof TileEntityLockableLoot) {
-            if (todo != null) {
+        if (tileentity instanceof TileEntityLockableLoot)
+        {
+            if (todo != null)
+            {
                 String lootTable = todo.getCondition();
                 int level = (pos.getY() - profile.GROUNDLEVEL) / 6;
                 int floor = (pos.getY() - info.getCityGroundLevel()) / 6;
                 ConditionContext conditionContext = new ConditionContext(level, floor, info.floorsBelowGround, info.getNumFloors(),
-                        todo.getPart(), todo.getBuilding(), info.chunkX, info.chunkZ) {
+                    todo.getPart(), todo.getBuilding(), info.chunkX, info.chunkZ)
+                {
                     @Override
-                    public boolean isSphere() {
+                    public boolean isSphere()
+                    {
                         return CitySphere.isInSphere(info.chunkX, info.chunkZ, pos, LostCityChunkGenerator.this);
                     }
 
                     @Override
-                    public String getBiome() {
+                    public String getBiome()
+                    {
                         return world.getBiome(pos).getBiomeName();
                     }
                 };
                 String randomValue = AssetRegistries.CONDITIONS.get(lootTable).getRandomValue(random, conditionContext);
-                if (randomValue == null) {
+                if (randomValue == null)
+                {
                     throw new RuntimeException("Condition '" + lootTable + "' did not return a table under certain conditions!");
                 }
                 ((TileEntityLockableLoot) tileentity).setLootTable(new ResourceLocation(randomValue), random.nextLong());
                 tileentity.markDirty();
-                if (LostCityConfiguration.DEBUG) {
+                if (LostCityConfiguration.DEBUG)
+                {
                     LostCities.setup.getLogger().debug("createLootChest: loot=" + randomValue + " pos=" + pos.toString());
                 }
             }
@@ -525,7 +629,8 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
 
 
     @Override
-    public void populate(int chunkX, int chunkZ) {
+    public void populate(int chunkX, int chunkZ)
+    {
         BlockFalling.fallInstantly = true;
         int x = chunkX * 16;
         int z = chunkZ * 16;
@@ -542,28 +647,38 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         ChunkPos cp = new ChunkPos(chunkX, chunkZ);
         LostCityProfile profile = BuildingInfo.getProfile(chunkX, chunkZ, this);
 
-        if (profile.GENERATE_MINESHAFTS) {
+        if (profile.GENERATE_MINESHAFTS)
+        {
             this.mineshaftGenerator.generateStructure(w, this.rand, cp);
         }
-        if (profile.GENERATE_VILLAGES) {
-            if (profile.PREVENT_VILLAGES_IN_CITIES) {
-                if (!BuildingInfo.isCity(chunkX, chunkZ, this)) {
+        if (profile.GENERATE_VILLAGES)
+        {
+            if (profile.PREVENT_VILLAGES_IN_CITIES)
+            {
+                if (!BuildingInfo.isCity(chunkX, chunkZ, this))
+                {
                     flag = this.villageGenerator.generateStructure(w, this.rand, cp);
                 }
-            } else {
+            }
+            else
+            {
                 flag = this.villageGenerator.generateStructure(w, this.rand, cp);
             }
         }
-        if (profile.GENERATE_STRONGHOLDS) {
+        if (profile.GENERATE_STRONGHOLDS)
+        {
             this.strongholdGenerator.generateStructure(w, this.rand, cp);
         }
-        if (profile.GENERATE_SCATTERED) {
+        if (profile.GENERATE_SCATTERED)
+        {
             this.scatteredFeatureGenerator.generateStructure(w, this.rand, cp);
         }
-        if (profile.GENERATE_OCEANMONUMENTS) {
+        if (profile.GENERATE_OCEANMONUMENTS)
+        {
             this.oceanMonumentGenerator.generateStructure(w, this.rand, cp);
         }
-        if (profile.GENERATE_MANSIONS) {
+        if (profile.GENERATE_MANSIONS)
+        {
             this.woodlandMansionGenerator.generateStructure(w, this.rand, cp);
         }
 
@@ -571,86 +686,105 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
         int l1;
         int i2;
 
-        if (profile.GENERATE_LAKES) {
+        if (profile.GENERATE_LAKES)
+        {
             boolean isCity = BuildingInfo.isCity(chunkX, chunkZ, this);
-            if (!profile.PREVENT_LAKES_RAVINES_IN_CITIES || !isCity) {
+            if (!profile.PREVENT_LAKES_RAVINES_IN_CITIES || !isCity)
+            {
                 if (biome != Biomes.DESERT && biome != Biomes.DESERT_HILLS && !flag && this.rand.nextInt(4) == 0
-                        && TerrainGen.populate(this, w, rand, chunkX, chunkZ, flag, PopulateChunkEvent.Populate.EventType.LAKE)) {
+                    && TerrainGen.populate(this, w, rand, chunkX, chunkZ, flag, PopulateChunkEvent.Populate.EventType.LAKE))
+                {
                     k1 = x + this.rand.nextInt(16) + 8;
                     l1 = this.rand.nextInt(256);
                     i2 = z + this.rand.nextInt(16) + 8;
                     (new WorldGenLakes(profile.getLiquidBlock().getBlock())).generate(w, this.rand, new BlockPos(k1, l1, i2));
                 }
 
-                if (TerrainGen.populate(this, w, rand, chunkX, chunkZ, flag, PopulateChunkEvent.Populate.EventType.LAVA) && !flag && this.rand.nextInt(8) == 0) {
+                if (TerrainGen.populate(this, w, rand, chunkX, chunkZ, flag, PopulateChunkEvent.Populate.EventType.LAVA) && !flag && this.rand.nextInt(8) == 0)
+                {
                     k1 = x + this.rand.nextInt(16) + 8;
                     l1 = this.rand.nextInt(this.rand.nextInt(248) + 8);
                     i2 = z + this.rand.nextInt(16) + 8;
 
-                    if (l1 < (profile.GROUNDLEVEL - profile.WATERLEVEL_OFFSET) || this.rand.nextInt(10) == 0) {
-                            if (ModSetup.advrock){
-                                (new WorldGenLakes(AdvancedRocketryBlocks.blockEnrichedLavaFluid)).generate(w, this.rand, new BlockPos(k1, l1, i2));
-                            }
-                            else
-                            {
-                                (new WorldGenLakes(Blocks.LAVA)).generate(w, this.rand, new BlockPos(k1, l1, i2));
-                            }
-                        }
+                    if (l1 < (profile.GROUNDLEVEL - profile.WATERLEVEL_OFFSET) || this.rand.nextInt(10) == 0)
+                    {
+                        if (ModSetup.advrock)
+                            (new WorldGenLakes(AdvancedRocketryBlocks.blockEnrichedLavaFluid)).generate(w, this.rand, new BlockPos(k1, l1, i2));
+                        else
+                            (new WorldGenLakes(Blocks.LAVA)).generate(w, this.rand, new BlockPos(k1, l1, i2));
                     }
                 }
             }
         }
 
-        boolean doGen = false;
-        if (profile.GENERATE_DUNGEONS) {
-            doGen = TerrainGen.populate(this, w, rand, chunkX, chunkZ, flag, PopulateChunkEvent.Populate.EventType.DUNGEON);
-            for (k1 = 0; doGen && k1 < 8; ++k1) {
-                l1 = x + this.rand.nextInt(16) + 8;
-                i2 = this.rand.nextInt(256);
-                int j2 = z + this.rand.nextInt(16) + 8;
-                (new WorldGenDungeons()).generate(w, this.rand, new BlockPos(l1, i2, j2));
-            }
+
+    boolean doGen = false;
+        if(profile.GENERATE_DUNGEONS)
+
+    {
+        doGen = TerrainGen.populate(this, w, rand, chunkX, chunkZ, flag, PopulateChunkEvent.Populate.EventType.DUNGEON);
+        for (k1 = 0; doGen && k1 < 8; ++k1)
+        {
+            l1 = x + this.rand.nextInt(16) + 8;
+            i2 = this.rand.nextInt(256);
+            int j2 = z + this.rand.nextInt(16) + 8;
+            (new WorldGenDungeons()).generate(w, this.rand, new BlockPos(l1, i2, j2));
         }
-
-        BlockPos pos = new BlockPos(x, 0, z);
-        biome.decorate(w, this.rand, pos);
-
-        if (TerrainGen.populate(this, w, rand, chunkX, chunkZ, flag, PopulateChunkEvent.Populate.EventType.ANIMALS)) {
-            WorldEntitySpawner.performWorldGenSpawning(w, biome, x + 8, z + 8, 16, 16, this.rand);
-        }
-        x += 8;
-        z += 8;
-
-        doGen = TerrainGen.populate(this, w, rand, chunkX, chunkZ, flag, PopulateChunkEvent.Populate.EventType.ICE);
-        for (k1 = 0; doGen && k1 < 16; ++k1) {
-            for (l1 = 0; l1 < 16; ++l1) {
-                i2 = w.getPrecipitationHeight(new BlockPos(x + k1, 0, z + l1)).getY();
-
-                if (w.canBlockFreeze(new BlockPos(k1 + x, i2 - 1, l1 + z), false)) {
-                    w.setBlockState(new BlockPos(k1 + x, i2 - 1, l1 + z), BlocksTFC.SEA_ICE.getDefaultState(), 2);
-                }
-
-                if (w.canSnowAt(new BlockPos(k1 + x, i2, l1 + z), true)) {
-                    w.setBlockState(new BlockPos(k1 + x, i2, l1 + z), Blocks.SNOW_LAYER.getDefaultState(), 2);
-                }
-            }
-        }
-
-        generateTrees(rand, chunkX, chunkZ, w, this);
-        generateVines(rand, chunkX, chunkZ, w, this);
-        generateLootSpawners(rand, chunkX, chunkZ, w, this);
-
-        MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(this, w, rand, chunkX, chunkZ, flag));
-
-        BlockFalling.fallInstantly = false;
     }
 
+    BlockPos pos = new BlockPos(x, 0, z);
+        biome.decorate(w,this.rand,pos);
+
+        if(TerrainGen.populate(this,w,rand,chunkX,chunkZ,flag,PopulateChunkEvent.Populate.EventType.ANIMALS))
+
+    {
+        WorldEntitySpawner.performWorldGenSpawning(w, biome, x + 8, z + 8, 16, 16, this.rand);
+    }
+
+    x +=8;
+    z +=8;
+
+    doGen =TerrainGen.populate(this,w,rand,chunkX,chunkZ,flag,PopulateChunkEvent.Populate.EventType.ICE);
+        for(k1 =0;doGen &&k1< 16; ++k1)
+
+    {
+        for (l1 = 0; l1 < 16; ++l1)
+        {
+            i2 = w.getPrecipitationHeight(new BlockPos(x + k1, 0, z + l1)).getY();
+
+            if (w.canBlockFreeze(new BlockPos(k1 + x, i2 - 1, l1 + z), false))
+            {
+                w.setBlockState(new BlockPos(k1 + x, i2 - 1, l1 + z), BlocksTFC.SEA_ICE.getDefaultState(), 2);
+            }
+
+            if (w.canSnowAt(new BlockPos(k1 + x, i2, l1 + z), true))
+            {
+                w.setBlockState(new BlockPos(k1 + x, i2, l1 + z), Blocks.SNOW_LAYER.getDefaultState(), 2);
+            }
+        }
+    }
+
+    generateTrees(rand, chunkX, chunkZ, w, this);
+
+    generateVines(rand, chunkX, chunkZ, w, this);
+
+    generateLootSpawners(rand, chunkX, chunkZ, w, this);
+
+        MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(this,w,rand,chunkX,chunkZ,flag));
+
+    BlockFalling.fallInstantly =false;
+}
+
+
     @Override
-    public boolean generateStructures(Chunk chunkIn, int x, int z) {
+    public boolean generateStructures(Chunk chunkIn, int x, int z)
+    {
         boolean flag = false;
 
-        if (profile.GENERATE_OCEANMONUMENTS) {
-            if (chunkIn.getInhabitedTime() < 3600L) {
+        if (profile.GENERATE_OCEANMONUMENTS)
+        {
+            if (chunkIn.getInhabitedTime() < 3600L)
+            {
                 flag |= this.oceanMonumentGenerator.generateStructure(this.worldObj, this.rand, new ChunkPos(x, z));
             }
         }
@@ -659,20 +793,27 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
     }
 
     @Override
-    public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+    public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
+    {
         return getDefaultCreatures(creatureType, pos);
     }
 
-    private List<Biome.SpawnListEntry> getDefaultCreatures(EnumCreatureType creatureType, BlockPos pos) {
+    private List<Biome.SpawnListEntry> getDefaultCreatures(EnumCreatureType creatureType, BlockPos pos)
+    {
         Biome Biome = this.worldObj.getBiomeForCoordsBody(pos);
-        if (creatureType == EnumCreatureType.MONSTER) {
-            if (profile.GENERATE_SCATTERED) {
-                if (this.scatteredFeatureGenerator.isInsideStructure(pos)) {
+        if (creatureType == EnumCreatureType.MONSTER)
+        {
+            if (profile.GENERATE_SCATTERED)
+            {
+                if (this.scatteredFeatureGenerator.isInsideStructure(pos))
+                {
                     return this.scatteredFeatureGenerator.getMonsters();
                 }
             }
-            if (profile.GENERATE_OCEANMONUMENTS) {
-                if (this.oceanMonumentGenerator.isPositionInStructure(this.worldObj, pos)) {
+            if (profile.GENERATE_OCEANMONUMENTS)
+            {
+                if (this.oceanMonumentGenerator.isPositionInStructure(this.worldObj, pos))
+                {
                     return this.oceanMonumentGenerator.getMonsters();
                 }
             }
@@ -683,103 +824,145 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
 
     @Nullable
     @Override
-    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
-        if ("Stronghold".equals(structureName) && this.strongholdGenerator != null) {
+    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored)
+    {
+        if ("Stronghold".equals(structureName) && this.strongholdGenerator != null)
+        {
             return this.strongholdGenerator.getNearestStructurePos(worldIn, position, findUnexplored);
-        } else if ("Monument".equals(structureName) && this.oceanMonumentGenerator != null) {
+        }
+        else if ("Monument".equals(structureName) && this.oceanMonumentGenerator != null)
+        {
             return this.oceanMonumentGenerator.getNearestStructurePos(worldIn, position, findUnexplored);
-        } else if ("LostMansion".equals(structureName) && this.woodlandMansionGenerator != null) {
+        }
+        else if ("LostMansion".equals(structureName) && this.woodlandMansionGenerator != null)
+        {
             return this.woodlandMansionGenerator.getNearestStructurePos(worldIn, position, findUnexplored);
-        } else if ("Village".equals(structureName) && this.villageGenerator != null) {
+        }
+        else if ("Village".equals(structureName) && this.villageGenerator != null)
+        {
             return this.villageGenerator.getNearestStructurePos(worldIn, position, findUnexplored);
-        } else if ("Mineshaft".equals(structureName) && this.mineshaftGenerator != null) {
+        }
+        else if ("Mineshaft".equals(structureName) && this.mineshaftGenerator != null)
+        {
             return this.mineshaftGenerator.getNearestStructurePos(worldIn, position, findUnexplored);
-        } else {
+        }
+        else
+        {
             return "Temple".equals(structureName) && this.scatteredFeatureGenerator != null ? this.scatteredFeatureGenerator.getNearestStructurePos(worldIn, position, findUnexplored) : null;
         }
     }
 
     @Override
-    public void recreateStructures(Chunk chunkIn, int x, int z) {
-        if (profile.GENERATE_MINESHAFTS) {
+    public void recreateStructures(Chunk chunkIn, int x, int z)
+    {
+        if (profile.GENERATE_MINESHAFTS)
+        {
             this.mineshaftGenerator.generate(this.worldObj, x, z, null);
         }
 
-        if (profile.GENERATE_VILLAGES) {
-            if (profile.PREVENT_VILLAGES_IN_CITIES) {
-                if (!BuildingInfo.isCity(x, z, this)) {
+        if (profile.GENERATE_VILLAGES)
+        {
+            if (profile.PREVENT_VILLAGES_IN_CITIES)
+            {
+                if (!BuildingInfo.isCity(x, z, this))
+                {
                     this.villageGenerator.generate(this.worldObj, x, z, null);
                 }
-            } else {
+            }
+            else
+            {
                 this.villageGenerator.generate(this.worldObj, x, z, null);
             }
         }
 
-        if (profile.GENERATE_STRONGHOLDS) {
+        if (profile.GENERATE_STRONGHOLDS)
+        {
             this.strongholdGenerator.generate(this.worldObj, x, z, null);
         }
 
-        if (profile.GENERATE_SCATTERED) {
+        if (profile.GENERATE_SCATTERED)
+        {
             this.scatteredFeatureGenerator.generate(this.worldObj, x, z, null);
         }
 
-        if (profile.GENERATE_OCEANMONUMENTS) {
+        if (profile.GENERATE_OCEANMONUMENTS)
+        {
             this.oceanMonumentGenerator.generate(this.worldObj, x, z, null);
         }
 
-        if (profile.GENERATE_MANSIONS) {
+        if (profile.GENERATE_MANSIONS)
+        {
             this.woodlandMansionGenerator.generate(this.worldObj, x, z, null);
         }
     }
 
-    public boolean hasMansion(int chunkX, int chunkZ) {
+    public boolean hasMansion(int chunkX, int chunkZ)
+    {
         return woodlandMansionGenerator != null && woodlandMansionGenerator.hasStructure(worldObj, chunkX, chunkZ);
     }
 
     @Override
-    public boolean isInsideStructure(World world, String structureName, BlockPos blockPos) {
-        if ("Stronghold".equals(structureName) && this.strongholdGenerator != null) {
+    public boolean isInsideStructure(World world, String structureName, BlockPos blockPos)
+    {
+        if ("Stronghold".equals(structureName) && this.strongholdGenerator != null)
+        {
             return this.strongholdGenerator.isInsideStructure(blockPos);
-        } else if ("LostMansion".equals(structureName) && this.woodlandMansionGenerator != null) {
+        }
+        else if ("LostMansion".equals(structureName) && this.woodlandMansionGenerator != null)
+        {
             return this.woodlandMansionGenerator.isInsideStructure(blockPos);
-        } else if ("Monument".equals(structureName) && this.oceanMonumentGenerator != null) {
+        }
+        else if ("Monument".equals(structureName) && this.oceanMonumentGenerator != null)
+        {
             return this.oceanMonumentGenerator.isInsideStructure(blockPos);
-        } else if ("Village".equals(structureName) && this.villageGenerator != null) {
+        }
+        else if ("Village".equals(structureName) && this.villageGenerator != null)
+        {
             return this.villageGenerator.isInsideStructure(blockPos);
-        } else if ("Mineshaft".equals(structureName) && this.mineshaftGenerator != null) {
+        }
+        else if ("Mineshaft".equals(structureName) && this.mineshaftGenerator != null)
+        {
             return this.mineshaftGenerator.isInsideStructure(blockPos);
-        } else {
+        }
+        else
+        {
             return "Temple".equals(structureName) && this.scatteredFeatureGenerator != null ? this.scatteredFeatureGenerator.isInsideStructure(blockPos) : false;
         }
     }
 
 
-    public boolean hasOceanMonument(int chunkX, int chunkZ) {
+    public boolean hasOceanMonument(int chunkX, int chunkZ)
+    {
         return oceanMonumentGenerator instanceof LostStructureOceanMonument && ((LostStructureOceanMonument) oceanMonumentGenerator).hasStructure(worldObj, chunkX, chunkZ);
     }
 
     @Override
-    public ILostChunkInfo getChunkInfo(int chunkX, int chunkZ) {
+    public ILostChunkInfo getChunkInfo(int chunkX, int chunkZ)
+    {
         return BuildingInfo.getBuildingInfo(chunkX, chunkZ, this);
     }
 
     @Override
-    public int getRealHeight(int level) {
+    public int getRealHeight(int level)
+    {
         return profile.GROUNDLEVEL + level * 6;
     }
 
     @Override
-    public ILostCityAssetRegistry<ILostCityBuilding> getBuildings() {
+    public ILostCityAssetRegistry<ILostCityBuilding> getBuildings()
+    {
         return AssetRegistries.BUILDINGS.cast();
     }
 
     @Override
-    public ILostCityAssetRegistry<ILostCityMultiBuilding> getMultiBuildings() {
+    public ILostCityAssetRegistry<ILostCityMultiBuilding> getMultiBuildings()
+    {
         return AssetRegistries.MULTI_BUILDINGS.cast();
     }
 
     @Override
-    public ILostCityAssetRegistry<ILostCityCityStyle> getCityStyles() {
+    public ILostCityAssetRegistry<ILostCityCityStyle> getCityStyles()
+    {
         return AssetRegistries.CITYSTYLES.cast();
     }
 }
