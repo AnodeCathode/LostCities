@@ -35,10 +35,10 @@ public class LostCityProfile {
 
     public int DEBRIS_TO_NEARBYCHUNK_FACTOR = 200;
 
-    private String LIQUID_BLOCK = "minecraft:water";
+    private String LIQUID_BLOCK = "tfc:fluid/fresh_water";
     private IBlockState liquidBlock = null;
 
-    private String BASE_BLOCK = "minecraft:stone";
+    private String BASE_BLOCK = "tfc:raw/basalt";
     private IBlockState baseBlock = null;
 
     public float VINE_CHANCE = 0.009f;
