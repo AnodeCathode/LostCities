@@ -9,7 +9,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "minecraft:diamond_sword",
+          "name": "tfc:metal/sword/tungsten_steel",
           "functions": [
             {
               "function": "set_count",
@@ -23,7 +23,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:gold_ingot",
+          "name": "tfc:metal/ingot/gold",
           "functions": [
             {
               "function": "set_count",
@@ -37,7 +37,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:diamond",
+          "name": "tfc:metal/ingot/tough",
           "functions": [
             {
               "function": "set_count",
@@ -51,7 +51,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:emerald",
+          "name": "tfc:metal/ingot/red_steel",
           "functions": [
             {
               "function": "set_count",

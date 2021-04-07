@@ -9,7 +9,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "minecraft:diamond_axe",
+          "name": "tfc:metal/axe/red_steel",
           "functions": [
             {
               "function": "set_count",
@@ -23,7 +23,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:gold_ingot",
+          "name": "tfc:metal/ingot/lead",
           "functions": [
             {
               "function": "set_count",
@@ -37,7 +37,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:iron_ingot",
+          "name": "tfc:metal/ingot/tin",
           "functions": [
             {
               "function": "set_count",
@@ -51,7 +51,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:diamond",
+          "name": "tfc:metal/ingot/tungsten_steel",
           "functions": [
             {
               "function": "set_count",
@@ -65,7 +65,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:emerald",
+          "name": "tfc:metal/ingot/blue_steel",
           "functions": [
             {
               "function": "set_count",
