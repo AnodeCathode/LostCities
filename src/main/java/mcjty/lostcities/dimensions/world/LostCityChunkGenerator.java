@@ -15,6 +15,7 @@ import mcjty.lostcities.dimensions.world.lost.cityassets.Condition;
 import mcjty.lostcities.dimensions.world.lost.cityassets.ConditionContext;
 import mcjty.lostcities.dimensions.world.lost.cityassets.WorldStyle;
 import mcjty.lostcities.dimensions.world.terraingen.LostCitiesTerrainGenerator;
+import mcjty.lostcities.setup.ModSetup;
 import mcjty.lostcities.varia.ChunkCoord;
 import net.dries007.tfc.objects.blocks.BlocksTFC;
 import zmaster587.advancedRocketry.api.AdvancedRocketryBlocks;
@@ -587,7 +588,14 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
                     i2 = z + this.rand.nextInt(16) + 8;
 
                     if (l1 < (profile.GROUNDLEVEL - profile.WATERLEVEL_OFFSET) || this.rand.nextInt(10) == 0) {
-                        (new WorldGenLakes(AdvancedRocketryBlocks.blockEnrichedLavaFluid)).generate(w, this.rand, new BlockPos(k1, l1, i2));
+                            if (ModSetup.advrock){
+                                (new WorldGenLakes(AdvancedRocketryBlocks.blockEnrichedLavaFluid)).generate(w, this.rand, new BlockPos(k1, l1, i2));
+                            }
+                            else
+                            {
+                                (new WorldGenLakes(Blocks.LAVA)).generate(w, this.rand, new BlockPos(k1, l1, i2));
+                            }
+                        }
                     }
                 }
             }
