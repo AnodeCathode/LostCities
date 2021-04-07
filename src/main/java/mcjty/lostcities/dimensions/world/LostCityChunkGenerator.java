@@ -16,6 +16,9 @@ import mcjty.lostcities.dimensions.world.lost.cityassets.ConditionContext;
 import mcjty.lostcities.dimensions.world.lost.cityassets.WorldStyle;
 import mcjty.lostcities.dimensions.world.terraingen.LostCitiesTerrainGenerator;
 import mcjty.lostcities.varia.ChunkCoord;
+import net.dries007.tfc.objects.blocks.BlocksTFC;
+import zmaster587.advancedRocketry.api.AdvancedRocketryBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSapling;
@@ -584,7 +587,7 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
                     i2 = z + this.rand.nextInt(16) + 8;
 
                     if (l1 < (profile.GROUNDLEVEL - profile.WATERLEVEL_OFFSET) || this.rand.nextInt(10) == 0) {
-                        (new WorldGenLakes(Blocks.LAVA)).generate(w, this.rand, new BlockPos(k1, l1, i2));
+                        (new WorldGenLakes(AdvancedRocketryBlocks.blockEnrichedLavaFluid)).generate(w, this.rand, new BlockPos(k1, l1, i2));
                     }
                 }
             }
@@ -616,7 +619,7 @@ public class LostCityChunkGenerator implements IChunkGenerator, ILostChunkGenera
                 i2 = w.getPrecipitationHeight(new BlockPos(x + k1, 0, z + l1)).getY();
 
                 if (w.canBlockFreeze(new BlockPos(k1 + x, i2 - 1, l1 + z), false)) {
-                    w.setBlockState(new BlockPos(k1 + x, i2 - 1, l1 + z), Blocks.ICE.getDefaultState(), 2);
+                    w.setBlockState(new BlockPos(k1 + x, i2 - 1, l1 + z), BlocksTFC.SEA_ICE.getDefaultState(), 2);
                 }
 
                 if (w.canSnowAt(new BlockPos(k1 + x, i2, l1 + z), true)) {
